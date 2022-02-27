@@ -11,3 +11,5 @@
 # TAKEAWAY
 - Rect class and how to find out its definition
 - .pyi files ???
+- mock shoot laser during dev
+- yEd graph editor
