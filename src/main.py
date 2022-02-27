@@ -11,6 +11,7 @@ class Game:
         # update all spite groups
         # draw all sprite groups
 
+        self.player.update()
         self.player.draw(screen)
 
 
