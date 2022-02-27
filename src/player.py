@@ -1,5 +1,6 @@
 from re import S
 import pygame
+from laser import Laser
 
 
 class Player(pygame.sprite.Sprite):
@@ -15,6 +16,8 @@ class Player(pygame.sprite.Sprite):
         self.ready = True
         self.laser_time = 0
         self.laser_cooldown = 600
+
+        self.lasers = pygame.sprite.Group()
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -36,7 +39,8 @@ class Player(pygame.sprite.Sprite):
                 self.ready = True
 
     def shoot_laser(self):
-        print('shoot laser')
+        # print('shoot laser')
+        self.lasers.add(Laser(self.rect.center))
 
     def constraint(self): # ciekawe rozwizanie polegajace na implementacji constraints
                           #w osobnej metodzie poza get_input
@@ -50,3 +54,5 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.constraint()
         self.recharge()
+        # self.lasers.move()
+        self.lasers.update() # it seems that update is some kind of special method BC it does not work with move name

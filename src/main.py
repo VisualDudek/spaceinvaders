@@ -12,6 +12,8 @@ class Game:
         # draw all sprite groups
 
         self.player.update()
+
+        self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
         self.player.draw(screen)
 
 

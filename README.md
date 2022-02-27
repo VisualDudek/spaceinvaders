@@ -6,6 +6,8 @@
     - move the player
     - constrain player to the window
     - shoot a laser + recharge
+4. create laser
+    - sprite with a position and speed
 
 
 # TAKEAWAY
@@ -13,3 +15,4 @@
 - .pyi files ???
 - mock shoot laser during dev
 - yEd graph editor
+- pygame: calling method on Group of sprites will call requseted method on all of them ONLY works with update name 
