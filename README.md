@@ -6,3 +6,8 @@
     - move the player
     - constrain player to the window
     - shoot a laser + recharge
+
+
+# TAKEAWAY
+- Rect class and how to find out its definition
+- .pyi files ???
