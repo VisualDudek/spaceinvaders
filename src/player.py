@@ -40,7 +40,7 @@ class Player(pygame.sprite.Sprite):
 
     def shoot_laser(self):
         # print('shoot laser')
-        self.lasers.add(Laser(self.rect.center))
+        self.lasers.add(Laser(self.rect.center, -5, self.rect.bottom))
 
     def constraint(self): # ciekawe rozwizanie polegajace na implementacji constraints
                           #w osobnej metodzie poza get_input

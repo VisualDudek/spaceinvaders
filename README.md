@@ -8,6 +8,10 @@
     - shoot a laser + recharge
 4. create laser
     - sprite with a position and speed
+    - removing lasers
+5. placing objects
+    - obstacles
+    - aliens
 
 
 # TAKEAWAY
