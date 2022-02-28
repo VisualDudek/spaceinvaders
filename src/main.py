@@ -103,6 +103,26 @@ class Game:
                     laser.kill()
 
         # alien lasers
+        if self.alien_lasers:
+            for laser in self.alien_lasers:
+
+                # obstacle collisions
+                if pygame.sprite.spritecollide(laser, self.blocks, dokill=True):
+                    laser.kill()
+
+                # player collison
+                if pygame.sprite.spritecollide(laser, self.player, dokill=False):
+                    laser.kill()
+                    print('player dead')
+
+        # aliens
+        if self.aliens:
+            for alien in self.aliens:
+                # obstacle collisions
+                pygame.sprite.spritecollide(alien, self.blocks, dokill=True)
+
+                #TODO: add alien vs. player collision
+
 
     def run(self):
         # update all spite groups
