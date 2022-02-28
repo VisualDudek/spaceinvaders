@@ -1,4 +1,3 @@
-from re import S
 import pygame
 from laser import Laser
 

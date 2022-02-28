@@ -19,6 +19,8 @@
 8. implementing the collisions
     - plaer lasers -> obstacle + aliens
     - alien lasers -> obstacle + player
+9. adding a health system
+10. adding a score system
 
 
 # TAKEAWAY
