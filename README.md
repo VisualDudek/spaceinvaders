@@ -12,6 +12,11 @@
 5. placing objects
     - obstacles
     - aliens
+6. make aliens:
+    - move
+    - shoot laser
+7. add extra alien
+8. implementing the collisions
 
 
 # TAKEAWAY

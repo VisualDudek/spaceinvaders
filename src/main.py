@@ -2,8 +2,8 @@ from re import X
 import pygame, sys
 from player import Player
 import obstacle
-from alien import Alien
-from random import choice
+from alien import Alien, ExtraAlien
+from random import choice, randint
 from laser import Laser
 
 
@@ -26,6 +26,10 @@ class Game:
         self.alien_setup(rows = 6, cols = 8)
         self.alien_direction = 1 
         self.alien_lasers = pygame.sprite.Group()
+
+        # Extra Alien setup
+        self.extraAlien = pygame.sprite.GroupSingle()
+        self.extraAlien_spawn_time = randint(400, 800)
 
     def alien_setup(self, rows, cols, x_distance = 60, y_distance = 48, x_offset = 70, y_offset = 100):
         for row_index, row in enumerate(range(rows)):
@@ -72,6 +76,14 @@ class Game:
             laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
             self.alien_lasers.add(laser_sprite)
         
+    def extra_alien_timer(self):
+        #TODO: fix infinite ExtraAliens, check Laser class to see how it is done
+        #or is it done by GroupSingle()?
+        self.extraAlien_spawn_time -= 1
+        if self.extraAlien_spawn_time <= 0:
+            self.extraAlien.add(ExtraAlien(choice(['right', 'left']), screen_width))
+            self.extraAlien_spawn_time = randint(400, 800)
+
     def run(self):
         # update all spite groups
         # draw all sprite groups
@@ -81,6 +93,8 @@ class Game:
         self.alien_position_checker()
         # self.alien_shoot()
         self.alien_lasers.update()
+        self.extra_alien_timer()
+        self.extraAlien.update()
 
         self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
         self.player.draw(screen)
@@ -88,6 +102,7 @@ class Game:
         self.blocks.draw(screen)
         self.aliens.draw(screen)
         self.alien_lasers.draw(screen)
+        self.extraAlien.draw(screen)
 
 
 if __name__ == '__main__': #TODO: wierd if-main setup
