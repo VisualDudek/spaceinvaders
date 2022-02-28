@@ -3,6 +3,8 @@ import pygame, sys
 from player import Player
 import obstacle
 from alien import Alien
+from random import choice
+from laser import Laser
 
 
 class Game:
@@ -23,6 +25,7 @@ class Game:
         self.aliens = pygame.sprite.Group()
         self.alien_setup(rows = 6, cols = 8)
         self.alien_direction = 1 
+        self.alien_lasers = pygame.sprite.Group()
 
     def alien_setup(self, rows, cols, x_distance = 60, y_distance = 48, x_offset = 70, y_offset = 100):
         for row_index, row in enumerate(range(rows)):
@@ -62,6 +65,12 @@ class Game:
     def create_multiple_obstacles(self, x_start, y_start, offset):
         for offset_x in offset:
             self.create_obstacle(x_start, y_start, offset_x)
+
+    def alien_shoot(self):
+        if self.aliens.sprites():
+            random_alien = choice(self.aliens.sprites()) # briliant aproach
+            laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
+            self.alien_lasers.add(laser_sprite)
         
     def run(self):
         # update all spite groups
@@ -70,12 +79,15 @@ class Game:
         self.player.update()
         self.aliens.update(self.alien_direction)
         self.alien_position_checker()
+        self.alien_shoot()
+        self.alien_lasers.update()
 
         self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
         self.player.draw(screen)
 
         self.blocks.draw(screen)
         self.aliens.draw(screen)
+        self.alien_lasers.draw(screen)
 
 
 if __name__ == '__main__': #TODO: wierd if-main setup
