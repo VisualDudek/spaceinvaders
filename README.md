@@ -17,6 +17,8 @@
     - shoot laser
 7. add extra alien
 8. implementing the collisions
+    - plaer lasers -> obstacle + aliens
+    - alien lasers -> obstacle + player
 
 
 # TAKEAWAY
