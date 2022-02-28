@@ -13,10 +13,14 @@ class Game:
         player_sprite = Player((screen_width / 2, screen_height), screen_width, 5)
         self.player = pygame.sprite.GroupSingle(player_sprite) #TODO: co to jest?
 
-        # health
+        # health system
         self.lives = 3
         self.live_surf = pygame.image.load('./graphics/player.png').convert_alpha()
         self.live_x_start_pos = screen_width - (self.live_surf.get_size()[0] * 2 + 20)
+
+        # score system
+        self.score = 0
+        self.font = pygame.font.Font('./font/Pixeled.ttf', 20)
 
         # obstacle setup
         self.shape = obstacle.shape
@@ -136,6 +140,12 @@ class Game:
             x = self.live_x_start_pos + (live * (self.live_surf.get_size()[0] + 10))
             screen.blit(self.live_surf, (x, 8))
 
+    def display_score(self):
+        score_surf = self.font.render(f'score: {self.score}', False, 'white')
+        score_rect = score_surf.get_rect(topleft = (10,-10)) # what it is?
+        screen.blit(score_surf, score_rect)
+
+
     def run(self):
         # update all spite groups
         # draw all sprite groups
@@ -149,6 +159,7 @@ class Game:
         self.extraAlien.update()
         self.collision_checks()
         self.display_lives()
+        self.display_score()
 
         self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
         self.player.draw(screen)
