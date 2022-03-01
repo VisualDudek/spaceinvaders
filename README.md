@@ -23,6 +23,9 @@
 10. adding a score system
 11. adding a CRT styling overlay
     - logic: draw some stuff on the screen and lower the opacity
+12. adding the audio files
+    - game music
+    - laser and explosion sounds
 
 
 # TAKEAWAY

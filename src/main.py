@@ -40,6 +40,16 @@ class Game:
         self.extraAlien = pygame.sprite.GroupSingle()
         self.extraAlien_spawn_time = randint(400, 800)
 
+        # Audio
+        music = pygame.mixer.Sound('./audio/music.wav')
+        music.set_volume(0.1)
+        music.play(loops = -1)
+        #TODO: make sound class
+        self.laser_sound = pygame.mixer.Sound('./audio/laser.wav')
+        self.laser_sound.set_volume(0.2)
+        self.explosion_sound = pygame.mixer.Sound('./audio/explosion.wav')
+        self.explosion_sound.set_volume(0.3)
+
     def alien_setup(self, rows, cols, x_distance = 60, y_distance = 48, x_offset = 70, y_offset = 100):
         for row_index, row in enumerate(range(rows)):
             for col_index, col in enumerate(range(cols)):
@@ -84,6 +94,7 @@ class Game:
             random_alien = choice(self.aliens.sprites()) # briliant aproach
             laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
             self.alien_lasers.add(laser_sprite)
+            self.laser_sound.play()
         
     def extra_alien_timer(self):
         #TODO: fix infinite ExtraAliens, check Laser class to see how it is done
@@ -109,11 +120,13 @@ class Game:
                     for alien in aliens_hit: # bc with one laser U can hit two aliens
                         self.score += alien.value
                     laser.kill()
+                    self.explosion_sound.play()
 
                 # ExtraAlien collisions
                 if pygame.sprite.spritecollide(laser, self.extraAlien, dokill=True):
                     laser.kill()
                     self.score += ExtraAlien.value
+                    self.explosion_sound.play()
 
         # alien lasers
         if self.alien_lasers:
@@ -136,7 +149,6 @@ class Game:
             for alien in self.aliens:
                 # obstacle collisions
                 pygame.sprite.spritecollide(alien, self.blocks, dokill=True)
-
                 #TODO: add alien vs. player collision
 
     def display_lives(self):
