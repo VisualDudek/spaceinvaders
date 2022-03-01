@@ -173,6 +173,26 @@ class Game:
         self.alien_lasers.draw(screen)
         self.extraAlien.draw(screen)
 
+class CRT:
+    def __init__(self) -> None:
+        self.tv = pygame.image.load('./graphics/tv.png').convert_alpha()
+        self.tv = pygame.transform.scale(self.tv,(screen_width, screen_height))
+
+    def create_crt_lines(self):
+        line_height = 3
+        line_amount = int(screen_height / line_height)
+        for line in range(line_amount):
+            y_pos = line * line_height
+            pygame.draw.line(self.tv, 'black', (0, y_pos), (screen_width, y_pos), 1)
+
+
+    def draw(self):
+        # flicker effect
+        # self.tv.set_alpha(randint(75,90))
+        self.tv.set_alpha(90)
+
+        self.create_crt_lines()
+        screen.blit(self.tv,(0,0))
 
 if __name__ == '__main__': #TODO: wierd if-main setup
     pygame.init()
@@ -181,6 +201,7 @@ if __name__ == '__main__': #TODO: wierd if-main setup
     screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
     game = Game()
+    crt = CRT()
 
     ALIENLASER = pygame.USEREVENT + 1   # what is tihs?
     pygame.time.set_timer(ALIENLASER, 800)
@@ -196,6 +217,7 @@ if __name__ == '__main__': #TODO: wierd if-main setup
 
         screen.fill((30,30,30)) #TODO: crate RGB color var
         game.run()
+        crt.draw()
 
         pygame.display.flip()
         clock.tick(60) #TODO: avoid magic numbers
