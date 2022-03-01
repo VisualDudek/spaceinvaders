@@ -85,14 +85,15 @@ shoot_laser</y:MethodLabel>
       <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="236.9999999999999" width="205.60000000000002" x="765.5490999999995" y="-294.5719999999996"/>
+          <y:Geometry height="262.59999999999985" width="205.60000000000002" x="765.5490999999995" y="-294.5719999999996"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="45.8056640625" x="79.89716796875001" xml:space="preserve" y="3.0">Game<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel xml:space="preserve">player
 alien_lasers: Group(*sprites)
-lives: int</y:AttributeLabel>
+lives: int
+score: int</y:AttributeLabel>
             <y:MethodLabel xml:space="preserve">run()
 create_obctacle()
 create_multiple_obstacles()
@@ -100,7 +101,8 @@ alien_position_checker()
 alien_move_down()
 alien_shoot()
 extra_alien_timer()
-display_lives()</y:MethodLabel>
+display_lives()
+display_score()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -593,6 +595,28 @@ speed: int</y:AttributeLabel>
         </y:GenericNode>
       </data>
     </node>
+    <node id="n46">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="40.0" width="80.0" x="1225.8173720031195" y="1852.2421874999977"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="62.91015625" x="8.544921875" xml:space="preserve" y="11.015625">add score<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n47">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="40.0" width="157.69906249999963" x="859.75953125" y="2105.5999999999976"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="82.931640625" x="37.383710937499814" xml:space="preserve" y="11.015625">display score<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
     <edge id="e0" source="n1" target="n2">
       <data key="d9"/>
       <data key="d10">
@@ -936,7 +960,7 @@ speed: int</y:AttributeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e30" source="n41" target="n42">
+    <edge id="e30" source="n42" target="n43">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -947,7 +971,7 @@ speed: int</y:AttributeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e31" source="n42" target="n43">
+    <edge id="e31" source="n25" target="n44">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -958,7 +982,7 @@ speed: int</y:AttributeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e32" source="n25" target="n44">
+    <edge id="e32" source="n44" target="n27">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -969,7 +993,33 @@ speed: int</y:AttributeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e33" source="n44" target="n27">
+    <edge id="e33" source="n41" target="n46">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="1272.2173720031196" y="1837.242187499998"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e34" source="n46" target="n42">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="1265.8173720031195" y="1919.7999999999997"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e35" source="n45" target="n47">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>

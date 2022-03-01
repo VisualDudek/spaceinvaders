@@ -21,6 +21,8 @@
     - alien lasers -> obstacle + player
 9. adding a health system
 10. adding a score system
+11. adding a CRT styling overlay
+    - logic: draw some stuff on the screen and lower the opacity
 
 
 # TAKEAWAY

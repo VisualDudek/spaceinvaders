@@ -104,12 +104,16 @@ class Game:
                     laser.kill()
 
                 # alien collisions
-                if pygame.sprite.spritecollide(laser, self.aliens, dokill=True):
+                aliens_hit = pygame.sprite.spritecollide(laser, self.aliens, dokill=True)
+                if aliens_hit:
+                    for alien in aliens_hit: # bc with one laser U can hit two aliens
+                        self.score += alien.value
                     laser.kill()
 
                 # ExtraAlien collisions
                 if pygame.sprite.spritecollide(laser, self.extraAlien, dokill=True):
                     laser.kill()
+                    self.score += ExtraAlien.value
 
         # alien lasers
         if self.alien_lasers:
