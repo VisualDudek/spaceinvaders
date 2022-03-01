@@ -28,6 +28,9 @@
     - laser and explosion sounds
 13. showing a victory message
 
+# IDEAS
+- add falling perks that give additiona live or laser that penetrates all obstacles
+
 
 # TAKEAWAY
 - Rect class and how to find out its definition
