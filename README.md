@@ -26,6 +26,7 @@
 12. adding the audio files
     - game music
     - laser and explosion sounds
+13. showing a victory message
 
 
 # TAKEAWAY
