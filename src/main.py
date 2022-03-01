@@ -1,3 +1,4 @@
+import imp
 from re import X
 import pygame, sys
 from player import Player
@@ -5,6 +6,7 @@ import obstacle
 from alien import Alien, ExtraAlien
 from random import choice, randint
 from laser import Laser
+from sound import Sound
 
 
 class Game:
@@ -41,14 +43,7 @@ class Game:
         self.extraAlien_spawn_time = randint(400, 800)
 
         # Audio
-        music = pygame.mixer.Sound('./audio/music.wav')
-        music.set_volume(0.1)
-        music.play(loops = -1)
-        #TODO: make sound class
-        self.laser_sound = pygame.mixer.Sound('./audio/laser.wav')
-        self.laser_sound.set_volume(0.2)
-        self.explosion_sound = pygame.mixer.Sound('./audio/explosion.wav')
-        self.explosion_sound.set_volume(0.3)
+        sound.music.play(loops = -1)
 
     def alien_setup(self, rows, cols, x_distance = 60, y_distance = 48, x_offset = 70, y_offset = 100):
         for row_index, row in enumerate(range(rows)):
@@ -94,7 +89,7 @@ class Game:
             random_alien = choice(self.aliens.sprites()) # briliant aproach
             laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
             self.alien_lasers.add(laser_sprite)
-            self.laser_sound.play()
+            sound.laser_sound.play()
         
     def extra_alien_timer(self):
         #TODO: fix infinite ExtraAliens, check Laser class to see how it is done
@@ -120,13 +115,13 @@ class Game:
                     for alien in aliens_hit: # bc with one laser U can hit two aliens
                         self.score += alien.value
                     laser.kill()
-                    self.explosion_sound.play()
+                    sound.explosion_sound.play()
 
                 # ExtraAlien collisions
                 if pygame.sprite.spritecollide(laser, self.extraAlien, dokill=True):
                     laser.kill()
                     self.score += ExtraAlien.value
-                    self.explosion_sound.play()
+                    sound.explosion_sound.play()
 
         # alien lasers
         if self.alien_lasers:
@@ -219,6 +214,7 @@ if __name__ == '__main__': #TODO: wierd if-main setup
     screen_height = 600
     screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
+    sound = Sound()
     game = Game()
     crt = CRT()
 
