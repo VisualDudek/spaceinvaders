@@ -12,3 +12,11 @@ class Sound():
 
         self.explosion_sound = pygame.mixer.Sound('./audio/explosion.wav')
         self.explosion_sound.set_volume(self.volume)
+
+    def music_up(self):
+        self.volume += 0.1
+        self.music.set_volume(self.volume)
+
+    def music_down(self):
+        self.volume -= 0.1
+        self.music.set_volume(self.volume)

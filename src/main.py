@@ -208,6 +208,13 @@ class CRT:
         self.create_crt_lines()
         screen.blit(self.tv,(0,0))
 
+class KeysControl():
+    def __int__(self):
+        pass
+    
+    def update(self):
+        pass
+
 if __name__ == '__main__': #TODO: wierd if-main setup
     pygame.init()
     screen_width = 600
@@ -217,19 +224,30 @@ if __name__ == '__main__': #TODO: wierd if-main setup
     sound = Sound()
     game = Game()
     crt = CRT()
+    keyscontrol = KeysControl()
 
     ALIENLASER = pygame.USEREVENT + 1   # what is tihs?
     pygame.time.set_timer(ALIENLASER, 800)
 
+
     while True:
-        for event in pygame.event.get():
+        events = pygame.event.get()
+        for event in events:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == ALIENLASER:
                 game.alien_shoot()
 
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_q:
+                    sound.music_up()
+
+                elif event.key == pygame.K_a:
+                    sound.music_down()
+
         keys = pygame.key.get_pressed()
+        keyscontrol.update()
 
         screen.fill((30,30,30)) #TODO: crate RGB color var
         game.run()

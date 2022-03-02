@@ -30,6 +30,7 @@
 
 # IDEAS
 - add falling perks that give additiona live or laser that penetrates all obstacles
+- blit surface with volume UP/DOWN old school ||||||
 
 # TODO
 1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
