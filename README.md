@@ -31,6 +31,10 @@
 # IDEAS
 - add falling perks that give additiona live or laser that penetrates all obstacles
 
+# TODO
+1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
+    - now keys are read in Player class, all keys handle are done also in Player class
+
 
 # TAKEAWAY
 - Rect class and how to find out its definition

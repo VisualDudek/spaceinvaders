@@ -20,10 +20,10 @@ class Player(pygame.sprite.Sprite):
 
         # Audio
         self.laser_sound = pygame.mixer.Sound('./audio/laser.wav')
-        self.laser_sound.set_volume(0.2)
+        self.laser_sound.set_volume(0.1)
 
-    def get_input(self):
-        keys = pygame.key.get_pressed()
+    def move_and_shoot(self, keys):
+        # keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
@@ -54,8 +54,8 @@ class Player(pygame.sprite.Sprite):
             self.rect.right = self.max_x_constraint
             # z powyzszego wynika ze metoda right/left przesuwa odpowiednio caly sprite, do potwierdzenia
 
-    def update(self):
-        self.get_input()
+    def update(self, keys):
+        self.move_and_shoot(keys)
         self.constraint()
         self.recharge()
         # self.lasers.move()

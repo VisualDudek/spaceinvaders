@@ -172,7 +172,7 @@ class Game:
         # update all spite groups
         # draw all sprite groups
 
-        self.player.update()
+        self.player.update(keys)
         self.aliens.update(self.alien_direction)
         self.alien_position_checker()
         # self.alien_shoot()
@@ -233,6 +233,7 @@ if __name__ == '__main__': #TODO: wierd if-main setup
             if event.type == ALIENLASER:
                 game.alien_shoot()
 
+        keys = pygame.key.get_pressed()
 
         screen.fill((30,30,30)) #TODO: crate RGB color var
         game.run()
