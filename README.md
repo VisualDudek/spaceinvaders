@@ -34,6 +34,9 @@
 # TODO
 1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
     - now keys are read in Player class, all keys handle are done also in Player class
+2. dev-sound: create separate Sound class
+3. dev-0.3 
+    - add keys to volume up/down music
 
 
 # TAKEAWAY
