@@ -35,8 +35,9 @@ class Game:
         # Alien setup
         self.aliens = pygame.sprite.Group()
         self.alien_setup(rows = 6, cols = 8)
-        self.alien_direction = 1 
         self.alien_lasers = pygame.sprite.Group()
+        self.alien_speed = 0.5
+        self.alien_direction = 1
 
         # Extra Alien setup
         self.extraAlien = pygame.sprite.GroupSingle()
@@ -64,12 +65,12 @@ class Game:
     def alien_position_checker(self):
         all_aliens = self.aliens.sprites()
         for alien in all_aliens:
-            if alien.rect.right >= screen_width:
+            if alien.rect.right >= screen_width and self.alien_direction > 0:
                 self.alien_direction = -1
-                self.alien_move_down(1)
-            elif alien.rect.left <= 0:
+                self.alien_move_down(2)
+            elif alien.rect.left <= 0 and self.alien_direction < 0:
                 self.alien_direction = 1
-                self.alien_move_down(1)
+                self.alien_move_down(2)
 
     def alien_move_down(self, distance):
         if self.aliens:
@@ -182,13 +183,29 @@ class Game:
             if pygame.time.get_ticks() > self.volume_time + self.volume_timeout:
                 self.volume_onscreen = False
 
+    def check_speed(self):
+        no = len(self.aliens)
+
+        if no <= 45:
+            self.alien_speed = 1
+        if no <= 35:
+            self.alien_speed = 1.5
+        if no <= 25:
+            self.alien_speed = 2
+        if no <= 15:
+            self.alien_speed = 2.5
+        if no <= 5:
+            self.alien_speed = 3
+
+
     def run(self):
         # update all spite groups
         # draw all sprite groups
 
         self.player.update(keys)
-        self.aliens.update(self.alien_direction)
+        self.aliens.update(self.alien_direction * self.alien_speed)
         self.alien_position_checker()
+        self.check_speed()
         # self.alien_shoot()
         self.alien_lasers.update()
         self.extra_alien_timer()

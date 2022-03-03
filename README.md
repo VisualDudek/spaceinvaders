@@ -30,9 +30,12 @@
 
 # IDEAS
 - add falling perks that give additiona live or laser that penetrates all obstacles
-- blit surface with volume UP/DOWN old school ||||||
+- DONE blit surface with volume UP/DOWN old school ||||||
 - add game over message
-- fewer aliens -> they move faster
+- DONE fewer aliens -> they move faster
+- top score table
+- add game menu
+- add pause
 
 # TODO
 1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
@@ -46,6 +49,11 @@
     - dislay volume on screen with timeout when up/down
     - sepeed up alien movement each time if less than 45,35,25,5
     - fix: enable alien speed by less than 1 
+    CLOSE v0.3
+4. dev-0.4
+    - TODO:
+        - add pause
+
 
 
 # TAKEAWAY
@@ -54,3 +62,4 @@
 - mock shoot laser during dev
 - yEd graph editor
 - pygame: calling method on Group of sprites will call requseted method on all of them ONLY works with update name 
+- create multiple dev branches OR keep only one dev -> create dev,merge,delete,repeat
