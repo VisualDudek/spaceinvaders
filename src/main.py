@@ -239,6 +239,7 @@ class Game:
 
         elif gamestate == GameState.PAUSE:
             self.player.draw(screen)
+            self.player.sprite.lasers.draw(screen) 
             self.blocks.draw(screen)
             self.aliens.draw(screen)
             self.alien_lasers.draw(screen)

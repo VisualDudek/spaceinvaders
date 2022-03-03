@@ -35,7 +35,8 @@
 - DONE fewer aliens -> they move faster
 - top score table
 - add game menu
-- add pause
+- DONE add pause
+- add recharge indicator
 
 # TODO
 1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
@@ -51,11 +52,10 @@
     - fix: enable alien speed by less than 1 
     CLOSE v0.3
 4. dev-0.4
-    - TODO:
-        - add pause; NEED to introduce GameState 
-            NEED to move alien_shoot out of event_loop
-                STOPGAP: remove alienlaser form event loop, DISADVANTAGE: after
-                    alienlaser is restored laser timer is reseted
+    - add pause; NEED to introduce GameState 
+        NEED to move alien_shoot out of event_loop
+            STOPGAP: remove alienlaser form event loop, DISADVANTAGE: after
+                alienlaser is restored laser timer is reseted
     - add Game State
 
 
