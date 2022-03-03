@@ -7,6 +7,7 @@ from alien import Alien, ExtraAlien
 from random import choice, randint
 from laser import Laser
 from sound import Sound
+from enum import Enum
 
 
 class Game:
@@ -92,10 +93,14 @@ class Game:
 
     def alien_shoot(self):
         if self.aliens.sprites():
-            random_alien = choice(self.aliens.sprites()) # briliant aproach
-            laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
-            self.alien_lasers.add(laser_sprite)
-            sound.laser_sound.play()
+
+            # do not like it in this way -> poor optimalization
+            for event in events:
+                if event.type == ALIENLASER:
+                    random_alien = choice(self.aliens.sprites()) # briliant aproach
+                    laser_sprite = Laser(random_alien.rect.center, 6, screen_height)
+                    self.alien_lasers.add(laser_sprite)
+                    sound.laser_sound.play()
         
     def extra_alien_timer(self):
         #TODO: fix infinite ExtraAliens, check Laser class to see how it is done
@@ -199,30 +204,37 @@ class Game:
 
 
     def run(self):
-        # update all spite groups
-        # draw all sprite groups
+        # game logic
 
-        self.player.update(keys)
-        self.aliens.update(self.alien_direction * self.alien_speed)
-        self.alien_position_checker()
-        self.check_speed()
-        # self.alien_shoot()
-        self.alien_lasers.update()
-        self.extra_alien_timer()
-        self.extraAlien.update()
-        self.collision_checks()
-        self.display_lives()
-        self.display_score()
+        if gamestate == GameState.RUN:
+            self.player.update(keys)
+            self.aliens.update(self.alien_direction * self.alien_speed)
+            self.alien_position_checker()
+            self.check_speed()
+            self.alien_shoot()
+            self.alien_lasers.update()
+            self.extra_alien_timer()
+            self.extraAlien.update()
+            self.collision_checks()
+            self.display_lives()
+            self.display_score()
 
-        self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
-        self.player.draw(screen)
+            self.player.sprite.lasers.draw(screen) # dlaczego poprzez sprite?
+            self.player.draw(screen)
 
-        self.blocks.draw(screen)
-        self.aliens.draw(screen)
-        self.alien_lasers.draw(screen)
-        self.extraAlien.draw(screen)
-        self.victory_message()
-        self.display_volume()
+            self.blocks.draw(screen)
+            self.aliens.draw(screen)
+            self.alien_lasers.draw(screen)
+            self.extraAlien.draw(screen)
+            self.victory_message()
+            self.display_volume()
+
+        elif gamestate == GameState.PAUSE:
+            self.player.draw(screen)
+            self.blocks.draw(screen)
+            self.aliens.draw(screen)
+            self.alien_lasers.draw(screen)
+            self.extraAlien.draw(screen)
 
 class CRT:
     def __init__(self) -> None:
@@ -252,27 +264,48 @@ class KeysControl():
     def update(self):
         for event in events:
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w:
-                    sound.music_up()
-                    game.volume_onscreen = True
-                    game.volume_time = pygame.time.get_ticks()
+            #TODO: why gamestate is unbound with == operator ???
+            global gamestate
+            if gamestate == GameState.RUN:
+        
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_w:
+                        sound.music_up()
+                        game.volume_onscreen = True
+                        game.volume_time = pygame.time.get_ticks()
 
-                elif event.key == pygame.K_s:
-                    sound.music_down()
-                    game.volume_onscreen = True
-                    game.volume_time = pygame.time.get_ticks()
+                    elif event.key == pygame.K_s:
+                        sound.music_down()
+                        game.volume_onscreen = True
+                        game.volume_time = pygame.time.get_ticks()
 
-                elif event.key == pygame.K_q:
-                    pygame.quit()
-                    sys.exit()
+                    elif event.key == pygame.K_p:
+                        gamestate = GameState.PAUSE
+                        sound.music.stop()
+                        pygame.time.set_timer(ALIENLASER, 0)
+
+                    elif event.key == pygame.K_q:
+                        pygame.quit()
+                        sys.exit()
+            
+            elif gamestate == GameState.PAUSE:
+
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_p:
+                        gamestate = GameState.RUN
+                        sound.music.play()
+                        pygame.time.set_timer(ALIENLASER, 800)
 
 
+class GameState(Enum):
+        RUN = 1
+        PAUSE = 2
 
 if __name__ == '__main__': #TODO: wierd if-main setup
     pygame.init()
     screen_width = 600
     screen_height = 600
+    gamestate = GameState.RUN
     screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
     sound = Sound()
@@ -291,7 +324,8 @@ if __name__ == '__main__': #TODO: wierd if-main setup
                 pygame.quit()
                 sys.exit()
             if event.type == ALIENLASER:
-                game.alien_shoot()
+                # game.alien_shoot()
+                pass
 
 
         keys = pygame.key.get_pressed()

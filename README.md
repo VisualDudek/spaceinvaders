@@ -52,7 +52,11 @@
     CLOSE v0.3
 4. dev-0.4
     - TODO:
-        - add pause
+        - add pause; NEED to introduce GameState 
+            NEED to move alien_shoot out of event_loop
+                STOPGAP: remove alienlaser form event loop, DISADVANTAGE: after
+                    alienlaser is restored laser timer is reseted
+    - add Game State
 
 
 
