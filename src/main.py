@@ -233,7 +233,24 @@ class KeysControl():
         pass
     
     def update(self):
-        pass
+        for event in events:
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_w:
+                    sound.music_up()
+                    game.volume_onscreen = True
+                    game.volume_time = pygame.time.get_ticks()
+
+                elif event.key == pygame.K_s:
+                    sound.music_down()
+                    game.volume_onscreen = True
+                    game.volume_time = pygame.time.get_ticks()
+
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+
+
 
 if __name__ == '__main__': #TODO: wierd if-main setup
     pygame.init()
@@ -259,12 +276,6 @@ if __name__ == '__main__': #TODO: wierd if-main setup
             if event.type == ALIENLASER:
                 game.alien_shoot()
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_q:
-                    sound.music_up()
-
-                elif event.key == pygame.K_a:
-                    sound.music_down()
 
         keys = pygame.key.get_pressed()
         keyscontrol.update()
