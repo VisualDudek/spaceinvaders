@@ -45,6 +45,11 @@ class Game:
         # Audio
         sound.music.play(loops = -1)
 
+        # Volume display 
+        self.volume_time = 0
+        self.volume_timeout = 300
+        self.volume_onscreen = False
+
     def alien_setup(self, rows, cols, x_distance = 60, y_distance = 48, x_offset = 70, y_offset = 100):
         for row_index, row in enumerate(range(rows)):
             for col_index, col in enumerate(range(cols)):
@@ -162,6 +167,20 @@ class Game:
             victory_rect = victory_surf.get_rect(center = (screen_width /2, screen_height /2))
             screen.blit(victory_surf, victory_rect)
 
+    def display_volume(self):
+        # display vmusic volume in the center of screen
+        #with timeout
+
+        if self.volume_onscreen:
+
+            text = f'VOLUME: {"| " * int(sound.volume * 10)}'
+
+            volume_surf = self.font.render(text , False, 'green')
+            volume_rect = volume_surf.get_rect(center = (screen_width/2, screen_height/2))
+            screen.blit(volume_surf, volume_rect)
+
+            if pygame.time.get_ticks() > self.volume_time + self.volume_timeout:
+                self.volume_onscreen = False
 
     def run(self):
         # update all spite groups
@@ -186,6 +205,7 @@ class Game:
         self.alien_lasers.draw(screen)
         self.extraAlien.draw(screen)
         self.victory_message()
+        self.display_volume()
 
 class CRT:
     def __init__(self) -> None:
