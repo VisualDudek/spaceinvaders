@@ -190,7 +190,7 @@ class Game:
             text = f'VOLUME: {"| " * int(sound.volume * 10)}'
 
             volume_surf = self.font.render(text , False, 'green')
-            volume_rect = volume_surf.get_rect(center = (screen_width/2, screen_height/2))
+            volume_rect = volume_surf.get_rect(center = (screen_width/2, int(screen_height * 0.7)))
             screen.blit(volume_surf, volume_rect)
 
             if pygame.time.get_ticks() > self.volume_time + self.volume_timeout:
@@ -244,6 +244,7 @@ class Game:
             self.aliens.draw(screen)
             self.alien_lasers.draw(screen)
             self.extraAlien.draw(screen)
+            self.display_volume()
             self.pause_message()
 
 class CRT:
@@ -305,6 +306,16 @@ class KeysControl():
                         gamestate = GameState.RUN
                         sound.music.play()
                         pygame.time.set_timer(ALIENLASER, 800)
+
+                    elif event.key == pygame.K_w:
+                        sound.music_up()
+                        game.volume_onscreen = True
+                        game.volume_time = pygame.time.get_ticks()
+
+                    elif event.key == pygame.K_s:
+                        sound.music_down()
+                        game.volume_onscreen = True
+                        game.volume_time = pygame.time.get_ticks()
 
 
 class GameState(Enum):
