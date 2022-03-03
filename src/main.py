@@ -23,7 +23,10 @@ class Game:
 
         # score system
         self.score = 0
+
+        # fonts
         self.font = pygame.font.Font('./font/Pixeled.ttf', 20)
+        self.font_40 = pygame.font.Font('./font/Pixeled.ttf', 40)
 
         # obstacle setup
         self.shape = obstacle.shape
@@ -173,6 +176,11 @@ class Game:
             victory_rect = victory_surf.get_rect(center = (screen_width /2, screen_height /2))
             screen.blit(victory_surf, victory_rect)
 
+    def pause_message(self):
+        pause_surf = self.font_40.render('P A U S E', False, 'white')
+        pause_rect = pause_surf.get_rect(center = (screen_width /2, screen_height /2))
+        screen.blit(pause_surf, pause_rect)
+
     def display_volume(self):
         # display vmusic volume in the center of screen
         #with timeout
@@ -235,6 +243,7 @@ class Game:
             self.aliens.draw(screen)
             self.alien_lasers.draw(screen)
             self.extraAlien.draw(screen)
+            self.pause_message()
 
 class CRT:
     def __init__(self) -> None:
