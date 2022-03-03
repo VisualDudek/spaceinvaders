@@ -4,7 +4,7 @@ class Sound():
     def __init__(self):
         # volume setup
         self.volume = 0.1
-        self.volume_fx = 0.5
+        self.volume_fx = 1
 
         self.music = pygame.mixer.Sound('./audio/music.wav')
         self.music.set_volume(self.volume)
@@ -16,14 +16,16 @@ class Sound():
         self.explosion_sound.set_volume(self.volume)
 
         # SFX
-        self.selectionClick = pygame.mixer.Sound('./audio/selectionClick.wav')
+        self.selectionClick = pygame.mixer.Sound('./audio/selectionclick.wav')
         self.selectionClick.set_volume(self.volume_fx)
 
 
     def music_up(self):
         self.volume += 0.1
         self.music.set_volume(self.volume)
+        self.selectionClick.play()
 
     def music_down(self):
         self.volume -= 0.1
         self.music.set_volume(self.volume)
+        self.selectionClick.play()
