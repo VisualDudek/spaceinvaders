@@ -57,6 +57,7 @@
             STOPGAP: remove alienlaser form event loop, DISADVANTAGE: after
                 alienlaser is restored laser timer is reseted
     - add Game State
+    - add SFX click
 
 
 
