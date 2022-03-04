@@ -212,6 +212,8 @@ class Game:
             self.alien_speed = 2.5
         if no <= 5:
             self.alien_speed = 3
+        if no == 1:
+            self.alien_speed = 4
 
     def update_alien_laser_time(self, time):
         if time != self.alien_laser_time:
