@@ -22,10 +22,18 @@ class Sound():
 
     def music_up(self):
         self.volume += 0.1
+        self.constrain_music_volume()
         self.music.set_volume(self.volume)
         self.selectionClick.play()
 
     def music_down(self):
         self.volume -= 0.1
+        self.constrain_music_volume()
         self.music.set_volume(self.volume)
         self.selectionClick.play()
+
+    def constrain_music_volume(self):
+        if self.volume > 1:
+            self.volume = 1
+        if self.volume < 0:
+            self.volume = 0

@@ -60,9 +60,11 @@
     - add SFX click
     CLOSE v0.4
 5. dev-0.5
-    - fix display lives and score during pause
+    - fix display lives and score during pause DONE
+    - constrain volume display to [0,1]
     - decouple magic number in alienlaser time event 
     - speed up last atanding alien
+    - ask "Do You want to surender? Y/N" on quite
 
 
 
