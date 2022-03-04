@@ -29,14 +29,15 @@
 13. showing a victory message
 
 # IDEAS
-- add falling perks that give additiona live or laser that penetrates all obstacles
 - DONE blit surface with volume UP/DOWN old school ||||||
-- add game over message
+- DONE add pause
 - DONE fewer aliens -> they move faster
+- add game over message
 - top score table
 - add game menu
-- DONE add pause
 - add recharge indicator
+- add falling perks that give additiona live or laser that penetrates all obstacles
+- ask "Do You want to surender? Y/N" on quite
 
 # TODO
 1. dev-0.2 need one place to read keys input and pass it to game control, menu, sound. 
@@ -67,9 +68,8 @@
     - speed up laser shoot: DONE
         - remove and add new alienlaser event only once
     - add super laser for player mode DONE
+    - add invincible mode DONE
     - rewrite game.check_speed if-conditions
-    - ask "Do You want to surender? Y/N" on quite
-
 
 
 # TAKEAWAY

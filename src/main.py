@@ -16,6 +16,7 @@ class Game:
         player_sprite = Player((screen_width / 2, screen_height), screen_width, 5)
         self.player = pygame.sprite.GroupSingle(player_sprite) #TODO: co to jest?
         self.super_laser_mode = True
+        self.invincible_mode = True
 
         # health system
         self.lives = 3
@@ -153,7 +154,10 @@ class Game:
                 # player collison
                 if pygame.sprite.spritecollide(laser, self.player, dokill=False):
                     laser.kill()
-                    self.lives -= 1
+                    
+                    if not self.invincible_mode:
+                        self.lives -= 1
+
                     if self.lives <= 0:
                         pygame.quit()
                         sys.exit()
