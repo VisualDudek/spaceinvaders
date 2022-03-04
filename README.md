@@ -58,6 +58,11 @@
                 alienlaser is restored laser timer is reseted
     - add Game State
     - add SFX click
+    CLOSE v0.4
+5. dev-0.5
+    - fix display lives and score during pause
+    - decouple magic number in alienlaser time event 
+    - speed up last atanding alien
 
 
 
