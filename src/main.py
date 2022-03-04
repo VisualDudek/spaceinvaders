@@ -246,6 +246,8 @@ class Game:
             self.extraAlien.draw(screen)
             self.display_volume()
             self.pause_message()
+            self.display_lives()
+            self.display_score()
 
 class CRT:
     def __init__(self) -> None:
