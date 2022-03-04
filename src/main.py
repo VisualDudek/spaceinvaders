@@ -42,6 +42,7 @@ class Game:
         self.alien_lasers = pygame.sprite.Group()
         self.alien_speed = 0.5
         self.alien_direction = 1
+        self.alien_laser_time = 800
 
         # Extra Alien setup
         self.extraAlien = pygame.sprite.GroupSingle()
@@ -199,8 +200,10 @@ class Game:
     def check_speed(self):
         no = len(self.aliens)
 
+        #TODO rewire if conditions, cannot execute all of them
         if no <= 45:
             self.alien_speed = 1
+            self.update_alien_laser_time(400)
         if no <= 35:
             self.alien_speed = 1.5
         if no <= 25:
@@ -209,6 +212,12 @@ class Game:
             self.alien_speed = 2.5
         if no <= 5:
             self.alien_speed = 3
+
+    def update_alien_laser_time(self, time):
+        if time != self.alien_laser_time:
+            self.alien_laser_time = time
+            pygame.time.set_timer(ALIENLASER, 0)
+            pygame.time.set_timer(ALIENLASER, self.alien_laser_time)
 
 
     def run(self):
@@ -307,7 +316,7 @@ class KeysControl():
                     if event.key == pygame.K_p:
                         gamestate = GameState.RUN
                         sound.music.play()
-                        pygame.time.set_timer(ALIENLASER, 800)
+                        pygame.time.set_timer(ALIENLASER, game.alien_laser_time)
 
                     elif event.key == pygame.K_w:
                         sound.music_up()
@@ -337,7 +346,7 @@ if __name__ == '__main__': #TODO: wierd if-main setup
     keyscontrol = KeysControl()
 
     ALIENLASER = pygame.USEREVENT + 1   # what is tihs?
-    pygame.time.set_timer(ALIENLASER, 800)
+    pygame.time.set_timer(ALIENLASER, game.alien_laser_time)
 
 
     while True:
