@@ -15,6 +15,7 @@ class Game:
         #Player seup
         player_sprite = Player((screen_width / 2, screen_height), screen_width, 5)
         self.player = pygame.sprite.GroupSingle(player_sprite) #TODO: co to jest?
+        self.super_laser_mode = True
 
         # health system
         self.lives = 3
@@ -129,7 +130,10 @@ class Game:
                 if aliens_hit:
                     for alien in aliens_hit: # bc with one laser U can hit two aliens
                         self.score += alien.value
-                    laser.kill()
+
+                    if not self.super_laser_mode:
+                        laser.kill()
+
                     sound.explosion_sound.play()
 
                 # ExtraAlien collisions

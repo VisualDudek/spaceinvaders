@@ -63,11 +63,12 @@
     - fix display lives and score during pause DONE
     - constrain volume display to [0,1] DONE
     - decouple magic number in alienlaser time event DONE
-    - speed up last atanding alien
-    - ask "Do You want to surender? Y/N" on quite
+    - speed up last atanding alien DONE
     - speed up laser shoot: DONE
         - remove and add new alienlaser event only once
+    - add super laser for player mode DONE
     - rewrite game.check_speed if-conditions
+    - ask "Do You want to surender? Y/N" on quite
 
 
 
