@@ -1,3 +1,24 @@
+
+# GOALS
+After one year since I last worked on this code will revisit the code with following goals:
+1. assess how well code is documented and does `README` or other resources (e.g. graphml) provide you a quick way to get along with code
+2. document code logic with marmaid in VS Code
+3. enhance code with type annotations
+
+# DIARY
+## 12/10/23
+- IDEA: create your own Color class based on `Colour` lib. which already have decent `RGB_TO_COLOR_NAMES` dict
+- NOTE: lack of src. of code, I beleve that this is based on some YT tutorial
+- NOTE: `pygame` have interesting internal events system, simillar to `Textual`
+- TODO: need to know more about event system, is it reseted every game tick?
+  - `pygame.event.get()` will get all the messages and removes them feom the queue. See docs.
+  - `pygame.time.set_timer(event, millis, loops=0)` repeatedly create an event on the envent queue
+  - `pygame.sprite.Group` a container class to hold and manage multiple Sprite obj. e.g. `.update()`
+- IDEA: refactor `ALIENLASER` type int into `pygame.event.Event` obj.
+- TODO: need to decouple the code!
+- NOTE: how to test pypame code?
+- ADD GAME FEATURE: show cooldown bar
+
 # dev process
 1. Create main window
 2. Create the game class
