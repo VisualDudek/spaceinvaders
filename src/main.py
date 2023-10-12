@@ -211,7 +211,7 @@ class Game:
         #TODO rewire if conditions, cannot execute all of them
         if no <= 45:
             self.alien_speed = 1
-            self.update_alien_laser_time(400)
+            self.update_alien_laser_time(800)
         if no <= 35:
             self.alien_speed = 1.5
         if no <= 25:
