@@ -98,6 +98,7 @@ class Game:
             self.create_obstacle(x_start, y_start, offset_x)
 
     def alien_shoot(self):
+        '''Randomly choose one alien and create laser sprite on ALIENLASER event'''
         if self.aliens.sprites():
 
             # do not like it in this way -> poor optimalization
@@ -206,6 +207,7 @@ class Game:
                 self.volume_onscreen = False
 
     def check_speed(self):
+        '''Based on how many aliens are left and change their speed'''
         no = len(self.aliens)
 
         #TODO rewire if conditions, cannot execute all of them
@@ -224,14 +226,15 @@ class Game:
             self.alien_speed = 4
 
     def update_alien_laser_time(self, time):
+        '''Update alien laser speed via change in millis time event is created in event queue'''
         if time != self.alien_laser_time:
             self.alien_laser_time = time
-            pygame.time.set_timer(ALIENLASER, 0)
+            pygame.time.set_timer(ALIENLASER, 0) # why first need to be set to 0?
             pygame.time.set_timer(ALIENLASER, self.alien_laser_time)
 
 
     def run(self):
-        # game logic
+        # game logic based on gamestate
 
         if gamestate == GameState.RUN:
             self.player.update(keys)
@@ -269,6 +272,7 @@ class Game:
             self.display_score()
 
 class CRT:
+    '''Cathode Ray Tube monitor effect'''
     def __init__(self) -> None:
         self.tv = pygame.image.load('./graphics/tv.png').convert_alpha()
         self.tv = pygame.transform.scale(self.tv,(screen_width, screen_height))
@@ -288,6 +292,7 @@ class CRT:
 
         self.create_crt_lines()
         screen.blit(self.tv,(0,0))
+
 
 class KeysControl():
     def __int__(self):
@@ -352,14 +357,18 @@ if __name__ == '__main__': #TODO: wierd if-main setup
     clock = pygame.time.Clock()
     sound = Sound()
     game = Game()
-    crt = CRT()
+    crt = CRT() # what is this? -> CRT monitor effect "Cathode Ray Tube"
     keyscontrol = KeysControl()
 
     ALIENLASER = pygame.USEREVENT + 1   # what is tihs?
+    # repeatedly create an event on th event queue
+    #this event is hadled by Game.alien_shoot() method 
     pygame.time.set_timer(ALIENLASER, game.alien_laser_time)
 
 
+    # game loop
     while True:
+        # handle events
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
@@ -369,13 +378,21 @@ if __name__ == '__main__': #TODO: wierd if-main setup
                 # game.alien_shoot()
                 pass
 
-
+        # handle keys
+        #reading in docs that maybe pygame.KEYDOWN event will be better solution?
         keys = pygame.key.get_pressed()
         keyscontrol.update()
 
         screen.fill((30,30,30)) #TODO: crate RGB color var
         game.run()
+
+        # add crt effect
         crt.draw()
 
+        # Update the full display Surface to the screen
+        # pygame.display.update() this like an optimized version of .flip()
         pygame.display.flip()
+
+        # update the clock, this should be calld once per frame. It will compute how many
+        #milliseconds have passed since the previous call.
         clock.tick(60) #TODO: avoid magic numbers

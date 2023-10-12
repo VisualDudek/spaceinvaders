@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.laser_sound.set_volume(0.1)
 
     def move_and_shoot(self, keys):
-        # keys = pygame.key.get_pressed()
+        '''Based of pressed keys, move player and shoot laser'''
 
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
@@ -37,17 +37,22 @@ class Player(pygame.sprite.Sprite):
             self.laser_time = pygame.time.get_ticks()
 
     def recharge(self):
+        '''self.ready cooldown'''
         if not self.ready:
             current_time = pygame.time.get_ticks()
             if current_time - self.laser_time >= self.laser_cooldown:
                 self.ready = True
 
     def shoot_laser(self):
-        # print('shoot laser')
+        '''Create laser object and add it to lasers group'''
         self.lasers.add(Laser(self.rect.center, -5, self.rect.bottom))
 
-    def constraint(self): # ciekawe rozwizanie polegajace na implementacji constraints
+    def constraint(self): 
+        '''Constrain player to screen'''
+        
+        # ciekawe rozwizanie polegajace na implementacji constraints
                           #w osobnej metodzie poza get_input
+
         if self.rect.left < 0:
             self.rect.left = 0
         if self.rect.right > self.max_x_constraint: 
@@ -55,8 +60,8 @@ class Player(pygame.sprite.Sprite):
             # z powyzszego wynika ze metoda right/left przesuwa odpowiednio caly sprite, do potwierdzenia
 
     def update(self, keys):
+        '''frame Lifecycle for player object '''
         self.move_and_shoot(keys)
         self.constraint()
         self.recharge()
-        # self.lasers.move()
-        self.lasers.update() # it seems that update is some kind of special method BC it does not work with move name
+        self.lasers.update()
