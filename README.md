@@ -5,6 +5,20 @@ After one year since I last worked on this code will revisit the code with follo
 2. document code logic with marmaid in VS Code
 3. enhance code with type annotations
 
+
+```mermaid
+flowchart TD
+    subgraph pygame setup
+    A[screen] --> AA[clock]
+    end
+    AA --> B{game loop}
+    B --> C[poll for events]
+    C --> D[handle keys]
+    D --> E[draw and display]
+    E --> F[tick clock]
+    F --> B
+```
+
 # DIARY
 ## 12/10/23
 - IDEA: create your own Color class based on `Colour` lib. which already have decent `RGB_TO_COLOR_NAMES` dict
@@ -16,8 +30,9 @@ After one year since I last worked on this code will revisit the code with follo
   - `pygame.sprite.Group` a container class to hold and manage multiple Sprite obj. e.g. `.update()`
 - IDEA: refactor `ALIENLASER` type int into `pygame.event.Event` obj.
 - TODO: need to decouple the code!
-- NOTE: how to test pypame code?
+- NOTE: how to test pygame code?
 - ADD GAME FEATURE: show cooldown bar
+- CONCLUSION: lack of simple example how given framework works, (e.g. quick start from docs)
 
 # dev process
 1. Create main window
